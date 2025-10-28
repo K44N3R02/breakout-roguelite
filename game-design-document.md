@@ -9,53 +9,76 @@
 [A concise, engaging summary of the game.]
 
 ### Genre
-[The primary and secondary genres (e.g., Action-RPG, Puzzle-Platformer).]
+Roguelite and Arcanoid/Breakout hybrid
 
 ### Target Audience
-[Who is this game for? (e.g., Ages 18-35, fans of 'Souls-like' difficulty).]
+Ages 7-77, casual/hypercasual players
 
 ### Platform(s)
-[Where will the game be played? (e.g., PC, PS5, Mobile).]
+Mobile (Android/iOS)
 
 ### Unique Selling Points (USPs)
 [What makes this game stand out? (e.g., Innovative physics-based climbing mechanic).]
 
 ### Completion Estimate
-[Rough estimate of time/scope (e.g., 12-18 months, Small-scale, downloadable title).]
+3 months
 
 ## 2. Gameplay & Mechanics
 
 ### Core Loop (The "Moment-to-Moment")
-[What does the player do constantly? (e.g., Explore > Fight > Loot > Level Up).]
+Arcanoid > Level Up > Loop
 
 ### Player Controls & Interface
 #### Input Map
-[Detailed mapping of controls (keyboard/mouse, controller, touch).]
-[List of key inputs and their corresponding actions.]
+For mobile devices, the paddle will follow the relative drag by touch input.
+For debuging, desktop builds will follow coordinate of mouse.
 
 #### Heads-Up Display (HUD)
-[What information is always visible? (Health, Ammo, Minimap, Score).]
+For Arcanoid phase, player's lives, current game level, and active perks are shown.
+For Level Up/Shop phase, again player's lives, last game level, their gold are shown.
 
 #### Menus
-[Design and flow of the main menu, pause menu, inventory, options, etc.]
+Main Menu: New Game, Continue Play, Credits, Settings, About
+Pause Menu: Resume, Exit, Settings
+Settings: Master Volume, Music Volume, Sound FX Volume
+Credits: Static text of used assets' creators
+About: Static text about game and its creators
 
 ### Core Mechanics
 #### Movement
-[Walking, running, jumping, vaulting, swimming, flying, etc.]
-
-#### Combat
-[Melee, Ranged, Magic, Cover system, Damage models.]
+Paddle moves in x-axis
 
 #### Interaction
-[Inventory, crafting, trading, dialogue trees, resource gathering.]
+Paddle-Ball: Ball continues to move away from the paddle after collision
+Paddle-Perk:
+Paddle-Gold:
+Paddle-Block:
+Ball-Block: Ball damages the block and continues moving normally after reflection
+Ball-Perk:
+Ball-Portal:
+Ball-Wall:
+Deadzone-Ball:
+Deadzone-Perk:
+Deadzone-Gold:
+Deadzone-Block:
+Portal-Perk:
+Portal-Gold:
+Bullet-Block:
+Bullet-Ball:
+Bullet-Perk:
+Bullet-Gold:
+Bullet-Portal:
+Bullet-Wall:
 
 #### Physics
-[How objects behave. Gravity, friction, destructibility.]
+No gravity effects will be present.
+No drag force or friction will be present.
+All collisions are perfectly elastic and conservative.
 
 ### Game Progression & Structure
-Level/World Design: [Linear levels, open world, hub-and-spoke.]
-Difficulty Scaling: [How the challenge increases (enemy stats, puzzle complexity).]
-Win/Loss Conditions: [How does the player succeed or fail?]
+Level/World Design: Procedurally generated (probably wave function collapse) Arcanoid levels
+Difficulty Scaling: Yet to be discussed after implementing mechanics
+Win/Loss Conditions: Player lose the run if they lose all their healths. They win a level in a run when they clear all blocks in it. Run does not end until player loses.
 
 ## 3. Story, Lore, & World
 No narrative elements are planned.
