@@ -273,8 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b77ef3048db474ab9678a4388c5938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  topLeft: {x: -6, y: -15}
-  bottomRight: {x: 6, y: -15}
+  topLeft: {x: -6.5, y: -15}
+  bottomRight: {x: 6.5, y: -15}
 --- !u!1 &218247175
 GameObject:
   m_ObjectHideFlags: 0
