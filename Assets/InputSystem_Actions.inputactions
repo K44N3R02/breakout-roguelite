@@ -7,9 +7,18 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "Move Debug",
                     "type": "Value",
                     "id": "2d1ac5c9-c045-4a2f-9446-0551a399ee7e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Move Touch",
+                    "type": "Value",
+                    "id": "0c434dbc-333b-4477-8820-d3e4d7a0a2e8",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -24,18 +33,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Move",
+                    "action": "Move Debug",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b3ec0e72-9831-48b6-bf5b-5ee22fd5680d",
+                    "id": "b9c381c1-52cf-44c8-a896-367b5e35f352",
                     "path": "<Touchscreen>/delta/x",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Touch",
-                    "action": "Move",
+                    "groups": "",
+                    "action": "Move Touch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
