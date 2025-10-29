@@ -288,7 +288,8 @@ GameObject:
   - component: {fileID: 218247177}
   - component: {fileID: 218247176}
   - component: {fileID: 218247180}
-  m_Layer: 0
+  - component: {fileID: 218247181}
+  m_Layer: 11
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,6 +445,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   initialVelocity: {x: 0, y: -10}
+--- !u!114 &218247181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218247175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b4791a3269e49fc8dd5156beda0b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArkanoidCollision
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
