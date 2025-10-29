@@ -19,17 +19,18 @@ public class PaddleControl : MonoBehaviour
 
     private void HandleMouseAction(InputAction.CallbackContext context)
     {
-        Vector3 new_position = transform.position;
-        new_position.x = Camera.main.ScreenToWorldPoint(new Vector2(context.ReadValue<float>(), 0)).x;
-        transform.position = new_position;
+        float screenPositionX = context.ReadValue<float>();
+
+        float pixelsPerUnit = Camera.main.pixelHeight / (2.0f * Camera.main.orthographicSize);
+
+        float worldPositionX = screenPositionX / pixelsPerUnit;
+        transform.position = new Vector3(worldPositionX, transform.position.y, transform.position.z);
     }
 
     private void HandleTouchAction(InputAction.CallbackContext context)
     {
         float screenDeltaX = context.ReadValue<float>();
 
-        // Get the ratio of world units per pixel
-        // For an orthographic camera, this is a standard idiom.
         float pixelsPerUnit = Camera.main.pixelHeight / (2.0f * Camera.main.orthographicSize);
 
         float worldDeltaX = screenDeltaX / pixelsPerUnit;
