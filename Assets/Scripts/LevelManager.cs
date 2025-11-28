@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     public GameOverScreen GameOverScreen;
     [SerializeField] private GameObject ball;
     [SerializeField] private TMP_Text goldText;
+    [SerializeField] private BallConfig ballConfig;
 
     private int ballCount = 1;
     private InputAction levelStartAction;
@@ -28,7 +29,7 @@ public class LevelManager : MonoBehaviour
     {
         if (!isLevelRunning)
         {
-            ball.GetComponent<Rigidbody2D>().linearVelocityY = -10;
+            ball.GetComponent<Rigidbody2D>().linearVelocityY = -ballConfig.Speed;
             isLevelRunning = true;
         }
     }

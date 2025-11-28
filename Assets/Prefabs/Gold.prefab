@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4607809385299952225}
   - component: {fileID: 1882838653530195429}
   - component: {fileID: 4001174555653200724}
-  - component: {fileID: 4163039942897617397}
+  - component: {fileID: 7768926397662001463}
   m_Layer: 14
   m_Name: Gold
   m_TagString: Untagged
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InitialVelocity
   initialVelocity: {x: 0, y: -10}
---- !u!114 &4163039942897617397
+--- !u!114 &7768926397662001463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

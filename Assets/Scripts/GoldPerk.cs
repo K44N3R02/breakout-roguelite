@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Grabbable : MonoBehaviour
+public class GoldPerk : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {

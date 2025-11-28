@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2008054814852431450
+--- !u!1 &2449778367615002736
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4889341431948843931}
-  - component: {fileID: 5730051530747307078}
-  - component: {fileID: 205937790993712471}
-  - component: {fileID: 593694764280229163}
-  - component: {fileID: 5075675807450706213}
-  - component: {fileID: 6568940504204114222}
-  - component: {fileID: -8807006386713647069}
-  - component: {fileID: 8648003011538628132}
-  m_Layer: 11
-  m_Name: Ball
+  - component: {fileID: 2976403128015285835}
+  - component: {fileID: 5400304975671836293}
+  - component: {fileID: 3662486553243234362}
+  - component: {fileID: 6297599408272066740}
+  - component: {fileID: 2277556960840013524}
+  - component: {fileID: 1560930287589927839}
+  m_Layer: 10
+  m_Name: Paddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4889341431948843931
+--- !u!4 &2976403128015285835
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008054814852431450}
+  m_GameObject: {fileID: 2449778367615002736}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5730051530747307078
+--- !u!212 &5400304975671836293
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008054814852431450}
+  m_GameObject: {fileID: 2449778367615002736}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -85,28 +83,28 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 9068815990330675741, guid: 107867d7cb1974ea78e8f43d07dff68f, type: 3}
+  m_Sprite: {fileID: 2668964518046741526, guid: 607f2f7628752419b96e1b236dd925bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 1
+  m_Size: {x: 5, y: 1.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &205937790993712471
-CircleCollider2D:
+--- !u!70 &3662486553243234362
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008054814852431450}
+  m_GameObject: {fileID: 2449778367615002736}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: ad43ca16ef885a75ba1317a3984ce47f, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -130,83 +128,46 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
---- !u!50 &593694764280229163
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008054814852431450}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: ad43ca16ef885a75ba1317a3984ce47f, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!114 &5075675807450706213
+  m_Offset: {x: 0.000000715258, y: 0.000018477442}
+  m_Size: {x: 4.9, y: 1.1620364}
+  m_Direction: 1
+--- !u!114 &6297599408272066740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008054814852431450}
+  m_GameObject: {fileID: 2449778367615002736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac6aef8c691aea46ab54d8f536ec1933, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a1b7589731464f1c81ed272d2a77c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  initialVelocity: {x: 0, y: 0}
---- !u!114 &6568940504204114222
+--- !u!114 &2277556960840013524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008054814852431450}
+  m_GameObject: {fileID: 2449778367615002736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b4791a3269e49fc8dd5156beda0b42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArkanoidCollision
---- !u!114 &-8807006386713647069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008054814852431450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81184b40533ed4120a2a363df17f6727, type: 3}
+  m_Script: {fileID: 11500000, guid: f3b77ef3048db474ab9678a4388c5938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  damageAmount: 1
---- !u!114 &8648003011538628132
+  topLeft: {x: -6.5, y: -15}
+  bottomRight: {x: 6.5, y: -15}
+--- !u!114 &1560930287589927839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2008054814852431450}
+  m_GameObject: {fileID: 2449778367615002736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fd600607d704aee9479823f5d1bfb4, type: 3}
+  m_Script: {fileID: 11500000, guid: 59ee1cce838fa40b5b31a5a3775ab261, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  ballConfig: {fileID: 11400000, guid: bb2e3fb93bfbd4a4faee34f5efdd2582, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::PaddleScaler
+  spriteRenderer: {fileID: 5400304975671836293}
+  collider2d: {fileID: 3662486553243234362}

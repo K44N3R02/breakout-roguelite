@@ -164,5 +164,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2270550e9c82a4330aaba73255a6d180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  spawnChance: 1
-  spawnee: {fileID: 8835283002569696992, guid: 01a29b98aef0c4ca79fcfcc4114f6d08, type: 3}
+  spawnChance: 0.5
+  perkList:
+  - perk: {fileID: 8835283002569696992, guid: 01a29b98aef0c4ca79fcfcc4114f6d08, type: 3}
+    relativeSpawnChance: 1
+  - perk: {fileID: 2036409860719285702, guid: 68540419cd1eb4d5abfd54397bd8c28b, type: 3}
+    relativeSpawnChance: 1
+  - perk: {fileID: 2036409860719285702, guid: e8397345de9bf4d7e95233cdafbbfae2, type: 3}
+    relativeSpawnChance: 1
