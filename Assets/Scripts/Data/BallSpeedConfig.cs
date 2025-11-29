@@ -5,6 +5,8 @@ using UnityEngine;
 public class BallConfig : ScriptableObject
 {
     [SerializeField] private float initialSpeed = 10f;
+    [SerializeField] private float maxSpeed = 20f;
+    [SerializeField] private float minSpeed = 5f;
     [NonSerialized] private float speed;
 
     public event Action OnBallSpeedChange;
@@ -19,9 +21,10 @@ public class BallConfig : ScriptableObject
         get { return speed; }
         set
         {
-            if (speed != value)
+            float clampedSpeed = Mathf.Clamp(value, minSpeed, maxSpeed);
+            if (speed != clampedSpeed)
             {
-                speed = value;
+                speed = clampedSpeed;
                 OnBallSpeedChange();
             }
         }

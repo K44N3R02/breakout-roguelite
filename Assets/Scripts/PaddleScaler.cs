@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(CapsuleCollider2D))]
@@ -5,6 +6,10 @@ public class PaddleScaler : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private CapsuleCollider2D collider2d;
+    [SerializeField] private float maxScaling = 1.5f;
+    [SerializeField] private float minScaling = 2/3f;
+
+    private float currentScaling = 1f;
 
     private void Start()
     {
@@ -19,6 +24,7 @@ public class PaddleScaler : MonoBehaviour
     public void ScaleByPercent(float percent)
     {
         float scaler = 1f + percent;
+        scaler = ClampScaling(scaler);
         Vector2 newSize = spriteRenderer.size;
         newSize.x *= scaler;
         spriteRenderer.size = newSize;
@@ -27,15 +33,25 @@ public class PaddleScaler : MonoBehaviour
         collider2d.size = newSize;
     }
 
-    [ContextMenu("Double")]
-    public void Double()
+    private float ClampScaling(float scaler)
     {
-        ScaleByPercent(1f);
-    }
-
-    [ContextMenu("Halve")]
-    public void Halve()
-    {
-        ScaleByPercent(-0.5f);
+        float newScaling = currentScaling * scaler;
+        if (newScaling > maxScaling)
+        {
+            float finalScaling = maxScaling / currentScaling;
+            currentScaling = maxScaling;
+            return finalScaling;
+        }
+        else if (newScaling < minScaling)
+        {
+            float finalScaling = minScaling / currentScaling;
+            currentScaling = minScaling;
+            return finalScaling;
+        }
+        else
+        {
+            currentScaling = newScaling;
+            return scaler;
+        }
     }
 }
