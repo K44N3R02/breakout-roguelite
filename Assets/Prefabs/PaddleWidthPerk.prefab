@@ -184,4 +184,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   expandSprite: {fileID: 7229499462154480209, guid: fd18e508a0dce4eb68a2fd8590848af9, type: 3}
   shrinkSprite: {fileID: 1832769464877848539, guid: 5373050c3a2cb4255bd97aaae46689c8, type: 3}
-  widthModifier: 0.5
+  modifier1:
+    modifier: 0.5
+    relativeChance: 1
+  modifier2:
+    modifier: -0.3
+    relativeChance: 1

@@ -184,5 +184,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   speedUpSprite: {fileID: -7592352708259704129, guid: 85624337085b548109607ea4685bf54c, type: 3}
   speedDownSprite: {fileID: -2519520933569769034, guid: f40f320bbe1514358b15a1b05e000187, type: 3}
-  speedChange: 5
+  modifier1:
+    modifier: 5
+    relativeChance: 1
+  modifier2:
+    modifier: -5
+    relativeChance: 1
   ballConfig: {fileID: 11400000, guid: bb2e3fb93bfbd4a4faee34f5efdd2582, type: 2}
