@@ -16,10 +16,7 @@
 - [ ] Sticky Paddle Perk
 
 ## Sprint
-- [ ] Deadzone - speedytosbaga
-        Must handle ball and golds
-- [ ] End Screen - speedytosbaga
-        Add a restart button
+- [ ] Restart button - speedytosbaga
 - [ ] Random Perk Dropper - k44n
         Must have list of perk prefabs
         Must have weighted drops
@@ -30,3 +27,6 @@
         Must reset when either is obtained
 
 ## Done
+- [x] Deadzone - speedytosbaga
+        Must handle ball and golds
+- [x] End Screen - speedytosbaga
