@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject ball;
     [SerializeField] private TMP_Text goldText;
     [SerializeField] private BallConfig ballConfig;
+    [SerializeField] private Canvas startScreen;
 
     private int ballCount = 1;
     private InputAction levelStartAction;
@@ -39,7 +40,6 @@ public class LevelManager : MonoBehaviour
         goldCount += amount;
         goldText.SetText($"Gold: {goldCount}");
     }
-
 
     void OnDestroy()
     {
