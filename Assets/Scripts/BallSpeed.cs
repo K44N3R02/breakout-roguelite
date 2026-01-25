@@ -6,6 +6,12 @@ public class BallSpeed : MonoBehaviour
     [SerializeField] private BallConfig ballConfig;
 
     private Rigidbody2D rb2d;
+private void Start()
+{
+    // Top ilk doğduğunda config'deki hız neyse onu uygula
+    UpdateSpeed();
+}
+
 
     private void Awake()
     {

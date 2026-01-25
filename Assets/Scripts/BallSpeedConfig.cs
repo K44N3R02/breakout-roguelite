@@ -29,4 +29,10 @@ public class BallConfig : ScriptableObject
             }
         }
     }
+
+    public void ResetSpeed()
+    {
+    speed = initialSpeed;
+    OnBallSpeedChange?.Invoke(); 
+    }
 }

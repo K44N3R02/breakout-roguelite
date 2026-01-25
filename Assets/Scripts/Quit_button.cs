@@ -4,6 +4,10 @@ using UnityEngine.SceneManagement;
 public class Quit_button : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+    [SerializeField] private BallConfig ballConfig;
+
     void Start()
     {
         
@@ -18,6 +22,8 @@ public class Quit_button : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quit");
+        ballConfig?.ResetSpeed();
         SceneController.Instance.LoadScene("StartUIScene");
+        
     }
 }
