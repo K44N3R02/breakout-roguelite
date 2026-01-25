@@ -17,6 +17,12 @@ public class PaddleControl : MonoBehaviour
         Debug.Log("Paddle Control Start");
     }
 
+    private void OnDisable()
+    {
+        mouseAction.performed -= HandleMouseAction;
+        touchAction.performed -= HandleTouchAction;
+    }
+
     private void HandleMouseAction(InputAction.CallbackContext context)
     {
         float screenPositionX = context.ReadValue<float>();
