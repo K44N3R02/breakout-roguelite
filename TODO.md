@@ -8,15 +8,14 @@
 - [ ] Object Pool
 
 ## Planned
-- [ ] Player Health
 - [ ] Heads-Up Display (HUD)
 - [ ] Multiple Ball Perk
-- [ ] Laser Paddle Perk
 - [ ] Sticky Paddle Perk
+- [ ] Level Completed Scene
 
 ## Sprint
-- [ ] Restart button - speedytosbaga
-- [ ] Start UI - k44n
+- [ ] Player Health - speedytosbaga
+- [ ] Laser Paddle Perk - k44n
 
 ## Done
 - [x] Deadzone - speedytosbaga
@@ -30,3 +29,5 @@
         Properly stretch the sprite and hitbox
 - [x] Ball Speed Increase/Decrease Perk - k44n
         Must reset when either is obtained
+- [x] Restart button - speedytosbaga
+- [x] Start UI - k44n
