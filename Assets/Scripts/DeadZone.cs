@@ -18,9 +18,11 @@ public class DeadZone : MonoBehaviour
         }
         if (other.gameObject.layer == Constants.BALL_LAYER)
         {
-            OnBallDestroyed?.Invoke();
             Destroy(other.gameObject);
+            OnBallDestroyed?.Invoke();
+            
             Debug.Log("Ball Destroyed");
+            
         }
     }
 

@@ -10,6 +10,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private BallConfig ballConfig;
     [SerializeField] private Canvas startScreen;
 
+    public PlayerHealth playerHealth; 
+
+    [SerializeField] private GameObject ballPrefab; 
+    [SerializeField] private Transform spawnPoint;
     private int ballCount = 1;
     private InputAction levelStartAction;
     private bool isLevelRunning = false;
@@ -24,6 +28,14 @@ public class LevelManager : MonoBehaviour
         DeadZone.OnBallDestroyed += HandleBallDestroyed;
         DeadZone.OnGrabbableDestroyed += HandleGrabbableDestroyed;
         
+        if (ball == null)
+        {
+            RespawnBall(); 
+        }
+        else
+        {
+            ballCount = 1; 
+        }
     }
 
     private void StartBall(InputAction.CallbackContext context)
@@ -50,14 +62,42 @@ public class LevelManager : MonoBehaviour
 void HandleBallDestroyed()
 {
     ballCount--;
-    if (ballCount <= 0)
+   
+    
+    if (ballCount <= 0 )
     {
-        Debug.Log(" Ball Destroyed");
-        triggerGameOver();
+          if (playerHealth != null)
+        {
+            playerHealth.ModifyHealth(-1); 
+        }
+
+        if (playerHealth.CurrentHealth > 0)
+        {
+            
+            Debug.Log("ball destroyed, Respawning Ball");
+            
+            RespawnBall(); 
+        }
+        else
+        {
+            
+            Debug.Log("Gameover");
+            
+            triggerGameOver(); 
+        }
     }
 
-    
+   
 }
+void RespawnBall()
+{
+    ballCount = 1;
+    isLevelRunning = false; 
+     ball = Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
+}
+
+
+
 void HandleGrabbableDestroyed()
 {
 }

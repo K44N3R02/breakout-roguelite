@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
 
     public delegate void HealthChangeEvent(int currentHealth);
     public event HealthChangeEvent OnHealthChange;
-
+    public int CurrentHealth => health;
     public delegate void Death();
     public event Death OnDeath;
 
@@ -28,6 +28,10 @@ public class Health : MonoBehaviour
     {
         health += amount;
         OnHealthChange(health);
+        if(health <= 0)
+        {
+            health = 0;
+        }
     }
 
     private void OnValidate()
