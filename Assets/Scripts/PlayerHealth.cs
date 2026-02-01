@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth > maxHealth) currentHealth = maxHealth;
         if (currentHealth < 0) currentHealth = 0;
 
-        Debug.Log($"Can Değişti: {currentHealth}");
+        Debug.Log($"Health changed {currentHealth}");
 
         OnHealthChanged?.Invoke(currentHealth);
 
@@ -41,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player Öldü!");
+        Debug.Log("Player died.");
         OnDeath?.Invoke();
         
      
