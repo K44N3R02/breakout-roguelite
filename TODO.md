@@ -3,19 +3,20 @@
 - [ ] Portals
 - [ ] Upgrades
 - [ ] Level Generation
-- [ ] Time Pressure (discuss implemenation strategies)
 - [ ] Rework Perk System
 - [ ] Polish
 - [ ] Object Pool
 
 ## Planned
 - [ ] Random Ball Start Angle
-- [ ] Heads-Up Display (HUD)
 - [ ] Multiple Ball Perk
 - [ ] Sticky Paddle Perk
-- [ ] Level Completed Scene
 
 ## Sprint
+
+- [ ] Level Completed Scene - k44n
+- [ ] Time Pressure - speedytosbaga
+- [ ] Heads-Up Display (HUD) - speedytosbaga
 
 ## Done
 - [x] Deadzone - speedytosbaga
