@@ -22,6 +22,7 @@ public class Quit_button : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quit");
+        Time.timeScale = 1f;
         ballConfig?.ResetSpeed();
         SceneController.Instance.LoadScene("StartUIScene");
         

@@ -136,7 +136,7 @@ void HandleGrabbableDestroyed()
 {
 }
 
-void triggerGameOver()
+ public void triggerGameOver()
 {
     if (!isGameOver)
     {
