@@ -3,8 +3,8 @@ using System;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 3;
-    private int currentHealth;
+    [SerializeField] public int maxHealth = 3;
+    public int currentHealth;
 
     public int CurrentHealth => currentHealth;
 
