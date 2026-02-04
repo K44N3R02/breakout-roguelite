@@ -13,10 +13,8 @@
 - [ ] Sticky Paddle Perk
 
 ## Sprint
-
-- [ ] Level Completed Scene - k44n
-- [ ] Time Pressure - speedytosbaga
-- [ ] Heads-Up Display (HUD) - speedytosbaga
+- [ ] Code Refactor - k44n
+- [ ] Portals - speedytosbaga
 
 ## Done
 - [x] Deadzone - speedytosbaga
@@ -34,3 +32,7 @@
 - [x] Start UI - k44n
 - [x] Player Health - speedytosbaga
 - [x] Laser Paddle Perk - k44n
+- [x] Level Completed Scene - k44n
+- [x] Time Pressure - speedytosbaga
+- [x] Heads-Up Display (HUD) - speedytosbaga
+
