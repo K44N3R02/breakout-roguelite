@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,13 +9,18 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject ball;
     [SerializeField] private TMP_Text goldText;
     [SerializeField] private BallConfig ballConfig;
-    [SerializeField] private Canvas startScreen;
 
     public PlayerHealth playerHealth; 
 
     [SerializeField] private GameObject ballPrefab; 
     [SerializeField] private Transform spawnPoint;
     private int ballCount = 1;
+    private int tileCount = 0;
+    [SerializeField] private GameObject levelGeneratorObject;
+    private ILevelGenerator levelGenerator;
+    [SerializeField] private List<GameObject> tiles = new();
+    [SerializeField] private GameObject levelCompletedScreen;
+    private int level = 1;
     private InputAction levelStartAction;
     private bool isLevelRunning = false;
 
@@ -27,7 +33,10 @@ public class LevelManager : MonoBehaviour
         goldCount = 0;
         DeadZone.OnBallDestroyed += HandleBallDestroyed;
         DeadZone.OnGrabbableDestroyed += HandleGrabbableDestroyed;
-        
+
+        levelGenerator = levelGeneratorObject.GetComponent<ILevelGenerator>();
+        tileCount = levelGenerator.GenerateLevel(tiles, level, OnTileDeath);
+
         if (ball == null)
         {
             RespawnBall(); 
@@ -36,6 +45,31 @@ public class LevelManager : MonoBehaviour
         {
             ballCount = 1; 
         }
+    }
+
+    private void OnTileDeath()
+    {
+        tileCount--;
+        if (tileCount <= 0)
+        {
+            ClearLevel();
+        }
+    }
+
+    private void ClearLevel()
+    {
+        isLevelRunning = false;
+        ball.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        level++;
+        levelCompletedScreen.SetActive(true);
+    }
+
+    public void NextLevel()
+    {
+        Destroy(ball);
+        levelCompletedScreen.SetActive(false);
+        tileCount = levelGenerator.GenerateLevel(tiles, level, OnTileDeath);
+        RespawnBall();
     }
 
     private void StartBall(InputAction.CallbackContext context)

@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockTilemap : MonoBehaviour
+public class BlockTilemap : MonoBehaviour, ILevelGenerator
 {
     [SerializeField] private GameObject blockPrefab;
     private int rows;
@@ -18,7 +19,7 @@ public class BlockTilemap : MonoBehaviour
                                  { false, true, true, false, true, false, true, true },
                                  { false, true, true, false, true, false, true, true } };
 
-    private void Start()
+    private void Awake()
     {
         rows = 8;
         columns = 8;
@@ -26,25 +27,12 @@ public class BlockTilemap : MonoBehaviour
         xSpacing = spriteSize.x;
         ySpacing = spriteSize.y;
         objectGrid = new GameObject[rows, columns];
-
-
-        CreateGrid();
     }
 
-    // private void OnDrawGizmos()
-    // {
-    //     if (objectGrid == null)
-    //     {
-    //         Vector3 spriteSize = blockPrefab.GetComponent<SpriteRenderer>().bounds.size;
-    //         xSpacing = spriteSize.x;
-    //         ySpacing = spriteSize.y;
-    //         objectGrid = new GameObject[rows, columns];
-    //     }
-    //     CreateGrid();
-    // }
-
-    private void CreateGrid()
+    public int GenerateLevel(List<GameObject> tiles, int levelCount, Health.Death onDeath)
     {
+        int tileCount = 0;
+
         for (int row = 0; row < rows; row++)
         {
             for (int col = 0; col < columns; col++)
@@ -63,9 +51,14 @@ public class BlockTilemap : MonoBehaviour
                 newObject.name = $"GridObject ({row}, {col})";
 
                 newObject.transform.SetParent(transform);
+                newObject.GetComponent<Health>().OnDeath += onDeath;
 
                 objectGrid[row, col] = newObject;
+
+                tileCount++;
             }
         }
+
+        return tileCount;
     }
 }
