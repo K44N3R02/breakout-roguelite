@@ -4,28 +4,44 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
-{   
-    public GameOverScreen GameOverScreen;
-    [SerializeField] private GameObject ball;
-    [SerializeField] private TMP_Text goldText;
-    [SerializeField] private BallConfig ballConfig;
+{
+    public static LevelManager Instance;
 
-    public PlayerHealth playerHealth; 
-
-    [SerializeField] private GameObject ballPrefab; 
+    // Internal State
+    [SerializeField] private GameObject ballPrefab;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject ball;
+    [SerializeField] private BallConfig ballConfig;
     private int ballCount = 1;
+
+    [SerializeField] private PlayerHealth playerHealth;
     private int tileCount = 0;
-    [SerializeField] private GameObject levelGeneratorObject;
-    private ILevelGenerator levelGenerator;
-    [SerializeField] private List<GameObject> tiles = new();
-    [SerializeField] private GameObject levelCompletedScreen;
     private int level = 1;
     private InputAction levelStartAction;
     private bool isLevelRunning = false;
-
     private int goldCount;
     private bool isGameOver = false;
+
+    // Level Generation
+    [SerializeField] private GameObject levelGeneratorObject;
+    [SerializeField] private List<GameObject> tiles;
+    private ILevelGenerator levelGenerator;
+
+    // UI
+    [SerializeField] private GameOverScreen gameOverScreen;
+    [SerializeField] private TMP_Text goldText;
+    [SerializeField] private GameObject levelCompletedScreen;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+    }
+
     private void Start()
     {
         levelStartAction = InputSystem.actions.FindAction("Level Start");
@@ -39,11 +55,11 @@ public class LevelManager : MonoBehaviour
 
         if (ball == null)
         {
-            RespawnBall(); 
+            RespawnBall();
         }
         else
         {
-            ballCount = 1; 
+            ballCount = 1;
         }
     }
 
@@ -93,58 +109,58 @@ public class LevelManager : MonoBehaviour
         DeadZone.OnGrabbableDestroyed -= HandleGrabbableDestroyed;
     }
 
-void HandleBallDestroyed()
-{
-    ballCount--;
-   
-    
-    if (ballCount <= 0 )
+    void HandleBallDestroyed()
     {
-          if (playerHealth != null)
+        ballCount--;
+
+
+        if (ballCount <= 0)
         {
-            playerHealth.ModifyHealth(-1); 
+            if (playerHealth != null)
+            {
+                playerHealth.ModifyHealth(-1);
+            }
+
+            if (playerHealth.CurrentHealth > 0)
+            {
+
+                Debug.Log("ball destroyed, Respawning Ball");
+
+                RespawnBall();
+            }
+            else
+            {
+
+                Debug.Log("Gameover");
+
+                triggerGameOver();
+            }
         }
 
-        if (playerHealth.CurrentHealth > 0)
-        {
-            
-            Debug.Log("ball destroyed, Respawning Ball");
-            
-            RespawnBall(); 
-        }
-        else
-        {
-            
-            Debug.Log("Gameover");
-            
-            triggerGameOver(); 
-        }
+
     }
-
-   
-}
-void RespawnBall()
-{
-    ballCount = 1;
-    isLevelRunning = false; 
-     ball = Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
-}
-
-
-
-void HandleGrabbableDestroyed()
-{
-}
-
- public void triggerGameOver()
-{
-    if (!isGameOver)
+    void RespawnBall()
     {
-        isGameOver = true;
-        Debug.Log("Game Over triggered.");
-        GameOverScreen.Setup(goldCount);
+        ballCount = 1;
+        isLevelRunning = false;
+        ball = Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
     }
 
 
-}
+
+    void HandleGrabbableDestroyed()
+    {
+    }
+
+    public void triggerGameOver()
+    {
+        if (!isGameOver)
+        {
+            isGameOver = true;
+            Debug.Log("Game Over triggered.");
+            gameOverScreen.Setup(goldCount);
+        }
+
+
+    }
 }

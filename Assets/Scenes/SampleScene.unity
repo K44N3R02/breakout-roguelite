@@ -796,7 +796,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTimeManager
   levelTime: 60
-  levelManager: {fileID: 776766744}
   timerText: {fileID: 664915204}
 --- !u!114 &664915204
 MonoBehaviour:
@@ -926,15 +925,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ca2ac1a9e80428380d6b04e89285fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  GameOverScreen: {fileID: 91469285}
-  ball: {fileID: 0}
-  goldText: {fileID: 881716266}
-  ballConfig: {fileID: 11400000, guid: bb2e3fb93bfbd4a4faee34f5efdd2582, type: 2}
-  playerHealth: {fileID: 1177994532}
   ballPrefab: {fileID: 2008054814852431450, guid: 02ab2ac6210374a168d6db7f746b6cb9, type: 3}
   spawnPoint: {fileID: 1211961569}
+  ball: {fileID: 0}
+  ballConfig: {fileID: 11400000, guid: bb2e3fb93bfbd4a4faee34f5efdd2582, type: 2}
+  playerHealth: {fileID: 1177994532}
   levelGeneratorObject: {fileID: 788101977}
   tiles: []
+  gameOverScreen: {fileID: 91469285}
+  goldText: {fileID: 881716266}
   levelCompletedScreen: {fileID: 287012631}
 --- !u!4 &776766745
 Transform:

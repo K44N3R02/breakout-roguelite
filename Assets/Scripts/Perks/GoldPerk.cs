@@ -6,7 +6,7 @@ public class GoldPerk : MonoBehaviour
     {
         if (collision.gameObject.layer == Constants.PADDLE_LAYER)
         {
-            GameObject.FindGameObjectWithTag("Level Manager").GetComponent<LevelManager>().AddGold(1);
+            LevelManager.Instance.AddGold(1);
             Destroy(gameObject);
         }
     }

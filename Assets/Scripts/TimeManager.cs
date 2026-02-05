@@ -7,13 +7,12 @@ public class SceneTimeManager : MonoBehaviour
     [SerializeField] private float levelTime = 60f; 
     private bool isTimerRunning = true;
 
-    public LevelManager levelManager;
     public TMP_Text timerText;      
 
     void Update()
     {
         
-        if (!isTimerRunning || levelManager == null) return;
+        if (!isTimerRunning) return;
 
         if (levelTime > 0)
         {
@@ -28,7 +27,7 @@ public class SceneTimeManager : MonoBehaviour
             UpdateTimerText();
 
             
-            levelManager.triggerGameOver(); 
+            LevelManager.Instance.triggerGameOver(); 
             Time.timeScale = 0f;
         }
     }
