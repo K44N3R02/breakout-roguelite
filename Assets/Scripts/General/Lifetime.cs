@@ -1,22 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class Lifetime : MonoBehaviour
 {
     [SerializeField] private float lifeInSeconds;
 
-    private float timer;
-
     private void Start()
     {
-        timer = 0f;
+        StartCoroutine(DestroyRoutine());
     }
 
-    private void Update()
+    private IEnumerator DestroyRoutine()
     {
-        timer += Time.deltaTime;
-        if (timer >= lifeInSeconds)
-        {
-            Destroy(gameObject);
-        }
+        yield return new WaitForSeconds(lifeInSeconds);
+        Destroy(gameObject);
     }
 }

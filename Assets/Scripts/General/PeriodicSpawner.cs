@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PeriodicSpawner : MonoBehaviour
@@ -5,20 +6,17 @@ public class PeriodicSpawner : MonoBehaviour
     [SerializeField] private GameObject spawnee;
     [SerializeField] private float period;
 
-    private float timer;
-
     private void Start()
     {
-        timer = 0f;
+        StartCoroutine(SpawnRoutine());
     }
 
-    private void Update()
+    private IEnumerator SpawnRoutine()
     {
-        timer += Time.deltaTime;
-        if (timer >= period)
+        while (true)
         {
+            yield return new WaitForSeconds(period);
             Instantiate(spawnee, transform.position, transform.rotation);
-            timer = 0f;
         }
     }
 }
