@@ -7,7 +7,10 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
+    public event System.Action<int> GoldCountChanged;
+
     // Internal State
+    public LevelTimeManager levelTime;
     [SerializeField] private GameObject ballPrefab;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject ball;
@@ -29,7 +32,6 @@ public class LevelManager : MonoBehaviour
 
     // UI
     [SerializeField] private GameOverScreen gameOverScreen;
-    [SerializeField] private TMP_Text goldText;
     [SerializeField] private GameObject levelCompletedScreen;
 
     private void Awake()
@@ -46,7 +48,11 @@ public class LevelManager : MonoBehaviour
     {
         levelStartAction = InputSystem.actions.FindAction("Level Start");
         levelStartAction.performed += StartBall;
+
+        levelTime.TimerEnded += triggerGameOver;
+
         goldCount = 0;
+        GoldCountChanged?.Invoke(goldCount);
         DeadZone.OnBallDestroyed += HandleBallDestroyed;
         DeadZone.OnGrabbableDestroyed += HandleGrabbableDestroyed;
 
@@ -75,6 +81,7 @@ public class LevelManager : MonoBehaviour
     private void ClearLevel()
     {
         isLevelRunning = false;
+        levelTime.StopLevelTimer();
         ball.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         level++;
         levelCompletedScreen.SetActive(true);
@@ -92,6 +99,7 @@ public class LevelManager : MonoBehaviour
     {
         if (!isLevelRunning)
         {
+            levelTime.StartLevelTimer(90);
             ball.GetComponent<Rigidbody2D>().linearVelocityY = -ballConfig.Speed;
             isLevelRunning = true;
         }
@@ -100,7 +108,12 @@ public class LevelManager : MonoBehaviour
     public void AddGold(int amount)
     {
         goldCount += amount;
-        goldText.SetText($"Gold: {goldCount}");
+        GoldCountChanged?.Invoke(goldCount);
+    }
+
+    public int GetGold()
+    {
+        return goldCount;
     }
 
     void OnDestroy()
@@ -116,6 +129,8 @@ public class LevelManager : MonoBehaviour
 
         if (ballCount <= 0)
         {
+            levelTime.StopLevelTimer();
+
             if (playerHealth != null)
             {
                 playerHealth.ModifyHealth(-1);
