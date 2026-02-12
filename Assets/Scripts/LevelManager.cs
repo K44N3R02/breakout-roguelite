@@ -1,11 +1,14 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
+
+    public event System.Action PrepareLevel;
+    public event System.Action EndLevelSuccess;
+    public event System.Action EndLevelFail;
 
     public event System.Action<int> GoldCountChanged;
 
@@ -29,10 +32,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject levelGeneratorObject;
     [SerializeField] private List<GameObject> tiles;
     private ILevelGenerator levelGenerator;
-
-    // UI
-    [SerializeField] private GameOverScreen gameOverScreen;
-    [SerializeField] private GameObject levelCompletedScreen;
 
     private void Awake()
     {
@@ -67,6 +66,8 @@ public class LevelManager : MonoBehaviour
         {
             ballCount = 1;
         }
+
+        PrepareLevel?.Invoke();
     }
 
     private void OnTileDeath()
@@ -84,13 +85,13 @@ public class LevelManager : MonoBehaviour
         levelTime.StopLevelTimer();
         ball.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         level++;
-        levelCompletedScreen.SetActive(true);
+        EndLevelSuccess?.Invoke();
     }
 
     public void NextLevel()
     {
         Destroy(ball);
-        levelCompletedScreen.SetActive(false);
+        PrepareLevel?.Invoke();
         tileCount = levelGenerator.GenerateLevel(tiles, level, OnTileDeath);
         RespawnBall();
     }
@@ -173,7 +174,7 @@ public class LevelManager : MonoBehaviour
         {
             isGameOver = true;
             Debug.Log("Game Over triggered.");
-            gameOverScreen.Setup(goldCount);
+            EndLevelFail?.Invoke();
         }
 
 
