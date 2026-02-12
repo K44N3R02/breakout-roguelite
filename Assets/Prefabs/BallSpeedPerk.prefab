@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2343507103263308293}
   - component: {fileID: -1979951979520092505}
   - component: {fileID: -5370243776495781920}
+  - component: {fileID: 517444752283039594}
   m_Layer: 14
   m_Name: BallSpeedPerk
   m_TagString: Untagged
@@ -191,3 +192,15 @@ MonoBehaviour:
     modifier: -5
     relativeChance: 1
   ballConfig: {fileID: 11400000, guid: bb2e3fb93bfbd4a4faee34f5efdd2582, type: 2}
+--- !u!114 &517444752283039594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036409860719285702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a997d1e8f2c4ffd8923a5e173aec43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestroyAtCleanup

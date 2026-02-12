@@ -33,8 +33,12 @@ public class RandomSpawner : MonoBehaviour
 
     private void SpawnOnDeath()
     {
-        float random = Random.Range(0f, 1f);
+        if (LevelManager.Instance.State != LevelState.Running)
+        {
+            return;
+        }
 
+        float random = Random.Range(0f, 1f);
         if (random < spawnChance)
         {
             GameObject spawnee = perkList[ChoosePerkToSpawn()].perk;

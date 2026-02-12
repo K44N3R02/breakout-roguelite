@@ -16,40 +16,44 @@ public class LevelTimeManager : MonoBehaviour
 
     private static readonly WaitForSeconds _waitForSeconds1 = new(1);
     private Coroutine countdownRoutine;
-    private int levelTimeLeft;
+    public int TimeLeft { get; private set; }
 
-    public void StartLevelTimer(int levelTime)
+    public void SetLevelTimer(int levelTime)
     {
         if (countdownRoutine != null)
+        {
             return;
-        levelTimeLeft = levelTime;
-        countdownRoutine = StartCoroutine(LevelCountdownRoutine());
+        }
+        TimeLeft = levelTime;
     }
 
-    public int StopLevelTimer()
+    public void StopLevelTimer()
     {
         if (countdownRoutine == null)
-            return -1;
+        {
+            return;
+        }
         StopCoroutine(countdownRoutine);
         countdownRoutine = null;
-        return levelTimeLeft;
     }
 
     public void ContinueLevelTimer()
     {
         if (countdownRoutine != null)
+        {
             return;
+        }
         countdownRoutine = StartCoroutine(LevelCountdownRoutine());
     }
 
     private IEnumerator LevelCountdownRoutine()
     {
-        TimerStart?.Invoke(levelTimeLeft);
-        while (levelTimeLeft > 0)
+        TimerStart?.Invoke(TimeLeft);
+        while (TimeLeft > 0)
         {
             yield return _waitForSeconds1;
-            levelTimeLeft--;
-            TimerTick?.Invoke(levelTimeLeft);
+            TimeLeft--;
+            TimerTick?.Invoke(TimeLeft);
         }
         TimerEnded?.Invoke();
     }

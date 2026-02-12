@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6254425597226433384}
   - component: {fileID: 2872894178517188905}
   - component: {fileID: 7237283751736854668}
+  - component: {fileID: 4836542371828477628}
   m_Layer: 16
   m_Name: Laser
   m_TagString: Untagged
@@ -186,3 +187,15 @@ MonoBehaviour:
   damageAmount: 1
   destroyAfterDamage: 1
   destroyAtWall: 1
+--- !u!114 &4836542371828477628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747504436016419620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a997d1e8f2c4ffd8923a5e173aec43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestroyAtCleanup

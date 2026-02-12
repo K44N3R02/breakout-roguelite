@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6297599408272066740}
   - component: {fileID: 2277556960840013524}
   - component: {fileID: 1560930287589927839}
+  - component: {fileID: 3977208834216424803}
   m_Layer: 10
   m_Name: Paddle
   m_TagString: Untagged
@@ -171,3 +172,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaddleScaler
   spriteRenderer: {fileID: 5400304975671836293}
   collider2d: {fileID: 3662486553243234362}
+  maxScaling: 1.5
+  minScaling: 0.6666667
+--- !u!114 &3977208834216424803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449778367615002736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c26c77a3c0934ebe95d528b11187321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RepositionAtPrepare
+  initialPosition: {x: 0, y: 0, z: 0}

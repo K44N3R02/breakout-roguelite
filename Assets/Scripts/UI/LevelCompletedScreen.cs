@@ -7,20 +7,20 @@ public class LevelCompletedScreen : MonoBehaviour
 
     private void Start()
     {
-        LevelManager.Instance.EndLevelSuccess += Activate;
-        LevelManager.Instance.PrepareLevel += Deactivate;
+            LevelManager.Instance.OnSuccess += Activate;
+            LevelManager.Instance.OnPreparation += Deactivate;
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        LevelManager.Instance.EndLevelSuccess -= Activate;
-        LevelManager.Instance.PrepareLevel -= Deactivate;
+            LevelManager.Instance.OnSuccess -= Activate;
+            LevelManager.Instance.OnPreparation -= Deactivate;
     }
 
     private void Activate()
     {
-        goldText.SetText($"Final Gold: {LevelManager.Instance.GetGold()}");
+            goldText.SetText($"Final Gold: {LevelManager.Instance.GetGold()}");
         gameObject.SetActive(true);
     }
 

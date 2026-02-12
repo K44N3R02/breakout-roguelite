@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3991241575214765580}
   - component: {fileID: 3816011011899197306}
   - component: {fileID: -1582817847438336908}
+  - component: {fileID: 841901923049612621}
   m_Layer: 14
   m_Name: LaserPerk
   m_TagString: Untagged
@@ -183,3 +184,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   laserSpawner: {fileID: 1126570486823192761, guid: eb8624f7412aa45a9b705debee8c5a3e, type: 3}
+--- !u!114 &841901923049612621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4729786026026221675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a997d1e8f2c4ffd8923a5e173aec43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestroyAtCleanup

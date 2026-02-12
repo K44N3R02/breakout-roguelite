@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 845384393124443384}
   - component: {fileID: 9108156655730929549}
   - component: {fileID: 8637109873608554268}
+  - component: {fileID: 487633813214849211}
   m_Layer: 0
   m_Name: Laser Spawner
   m_TagString: Untagged
@@ -60,3 +61,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   lifeInSeconds: 10
+--- !u!114 &487633813214849211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126570486823192761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a997d1e8f2c4ffd8923a5e173aec43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestroyAtCleanup

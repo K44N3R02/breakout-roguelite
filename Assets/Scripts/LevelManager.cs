@@ -1,16 +1,25 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+public enum LevelState { Preparation, Ready, Running, Success, Fail }
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    public event System.Action PrepareLevel;
-    public event System.Action EndLevelSuccess;
-    public event System.Action EndLevelFail;
+    public LevelState State { get; private set; }
 
-    public event System.Action<int> GoldCountChanged;
+    // Events for transitions
+    public event Action OnPreparation;
+    public event Action OnReady;
+    public event Action OnRunning;
+    public event Action OnSuccess;
+    public event Action OnFail;
+    public event Action OnCleanUp;
+
+    public event Action<int> GoldCountChanged;
 
     // Internal State
     public LevelTimeManager levelTime;
@@ -18,17 +27,15 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject ball;
     [SerializeField] private BallConfig ballConfig;
-    private int ballCount = 1;
+    private int ballCount = 0;
 
     [SerializeField] private PlayerHealth playerHealth;
     private int tileCount = 0;
     private int level = 1;
+    private int goldCount = 0;
     private InputAction levelStartAction;
-    private bool isLevelRunning = false;
-    private int goldCount;
-    private bool isGameOver = false;
 
-    // Level Generation
+    [Header("Level Generation")]
     [SerializeField] private GameObject levelGeneratorObject;
     [SerializeField] private List<GameObject> tiles;
     private ILevelGenerator levelGenerator;
@@ -37,7 +44,7 @@ public class LevelManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         Instance = this;
@@ -46,63 +53,132 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         levelStartAction = InputSystem.actions.FindAction("Level Start");
-        levelStartAction.performed += StartBall;
+        levelStartAction.performed += _ =>
+        {
+            OnStartInput();
+        };
 
-        levelTime.TimerEnded += triggerGameOver;
+        levelTime.TimerEnded += () =>
+        {
+            SetState(LevelState.Fail);
+        };
 
-        goldCount = 0;
-        GoldCountChanged?.Invoke(goldCount);
         DeadZone.OnBallDestroyed += HandleBallDestroyed;
         DeadZone.OnGrabbableDestroyed += HandleGrabbableDestroyed;
 
         levelGenerator = levelGeneratorObject.GetComponent<ILevelGenerator>();
-        tileCount = levelGenerator.GenerateLevel(tiles, level, OnTileDeath);
 
-        if (ball == null)
+        goldCount = 0;
+        GoldCountChanged?.Invoke(goldCount);
+
+        SetState(LevelState.Preparation);
+    }
+
+    private void SetState(LevelState newState)
+    {
+        // Exit logic
+        if (State == LevelState.Running)
         {
-            RespawnBall();
-        }
-        else
-        {
-            ballCount = 1;
+            levelTime.StopLevelTimer();
         }
 
-        PrepareLevel?.Invoke();
+        State = newState;
+
+        // Enter logic
+        switch (State)
+        {
+            case LevelState.Preparation:
+                OnCleanUp?.Invoke();
+                OnPreparation?.Invoke();
+                tileCount = levelGenerator.GenerateLevel(tiles, level, OnTileDeath);
+                levelTime.SetLevelTimer(90);
+                SetState(LevelState.Ready);
+                break;
+
+            case LevelState.Ready:
+                OnCleanUp?.Invoke();
+                RespawnBall();
+                OnReady?.Invoke();
+                break;
+
+            case LevelState.Running:
+                levelTime.ContinueLevelTimer();
+                LaunchBall();
+                OnRunning?.Invoke();
+                break;
+
+            case LevelState.Success:
+                OnCleanUp?.Invoke();
+                OnSuccess?.Invoke();
+                level++;
+                break;
+
+            case LevelState.Fail:
+                OnFail?.Invoke();
+                break;
+        }
+    }
+
+    private void OnStartInput()
+    {
+        if (State == LevelState.Ready)
+        {
+            SetState(LevelState.Running);
+        }
+    }
+
+    public void NextLevel()
+    {
+        if (State == LevelState.Success)
+        {
+            SetState(LevelState.Preparation);
+        }
     }
 
     private void OnTileDeath()
     {
         tileCount--;
-        if (tileCount <= 0)
+        if (tileCount <= 0 && State == LevelState.Running)
         {
-            ClearLevel();
+            SetState(LevelState.Success);
         }
     }
 
-    private void ClearLevel()
+    private void HandleBallDestroyed()
     {
-        isLevelRunning = false;
-        levelTime.StopLevelTimer();
-        ball.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-        level++;
-        EndLevelSuccess?.Invoke();
-    }
+        ballCount--;
 
-    public void NextLevel()
-    {
-        Destroy(ball);
-        PrepareLevel?.Invoke();
-        tileCount = levelGenerator.GenerateLevel(tiles, level, OnTileDeath);
-        RespawnBall();
-    }
-
-    private void StartBall(InputAction.CallbackContext context)
-    {
-        if (!isLevelRunning)
+        if (ballCount <= 0)
         {
-            levelTime.StartLevelTimer(90);
+            playerHealth.ModifyHealth(-1);
+
+            if (playerHealth.CurrentHealth > 0)
+            {
+                SetState(LevelState.Ready);
+            }
+            else
+            {
+                SetState(LevelState.Fail);
+            }
+        }
+    }
+
+    private void RespawnBall()
+    {
+        if (ball != null)
+        {
+            Destroy(ball);
+        }
+        ballCount = 1;
+        ball = Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
+        ball.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+    }
+
+    private void LaunchBall()
+    {
+        if (ball != null)
+        {
             ball.GetComponent<Rigidbody2D>().linearVelocityY = -ballConfig.Speed;
-            isLevelRunning = true;
         }
     }
 
@@ -117,66 +193,11 @@ public class LevelManager : MonoBehaviour
         return goldCount;
     }
 
-    void OnDestroy()
+    private void HandleGrabbableDestroyed() { }
+
+    private void OnDestroy()
     {
         DeadZone.OnBallDestroyed -= HandleBallDestroyed;
         DeadZone.OnGrabbableDestroyed -= HandleGrabbableDestroyed;
-    }
-
-    void HandleBallDestroyed()
-    {
-        ballCount--;
-
-
-        if (ballCount <= 0)
-        {
-            levelTime.StopLevelTimer();
-
-            if (playerHealth != null)
-            {
-                playerHealth.ModifyHealth(-1);
-            }
-
-            if (playerHealth.CurrentHealth > 0)
-            {
-
-                Debug.Log("ball destroyed, Respawning Ball");
-
-                RespawnBall();
-            }
-            else
-            {
-
-                Debug.Log("Gameover");
-
-                triggerGameOver();
-            }
-        }
-
-
-    }
-    void RespawnBall()
-    {
-        ballCount = 1;
-        isLevelRunning = false;
-        ball = Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
-    }
-
-
-
-    void HandleGrabbableDestroyed()
-    {
-    }
-
-    public void triggerGameOver()
-    {
-        if (!isGameOver)
-        {
-            isGameOver = true;
-            Debug.Log("Game Over triggered.");
-            EndLevelFail?.Invoke();
-        }
-
-
     }
 }

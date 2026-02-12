@@ -7,27 +7,18 @@ public class LevelFailedScreen : MonoBehaviour
 
     private void Start()
     {
-        if (LevelManager.Instance != null)
-        {
-            LevelManager.Instance.EndLevelFail += Activate;
-        }
+        LevelManager.Instance.OnFail += Activate;
         gameObject.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        if (LevelManager.Instance != null)
-        {
-            LevelManager.Instance.EndLevelFail -= Activate;
-        }
+        LevelManager.Instance.OnFail -= Activate;
     }
 
     private void Activate()
     {
-        if (goldText != null)
-        {
-            goldText.SetText($"Final Gold: {LevelManager.Instance.GetGold()}");
-        }
+        goldText.SetText($"Final Gold: {LevelManager.Instance.GetGold()}");
         gameObject.SetActive(true);
     }
 }
