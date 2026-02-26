@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockTilemap : MonoBehaviour, ILevelGenerator
+public class FixedLevelGenerator : MonoBehaviour, ILevelGenerator
 {
-    [SerializeField] private GameObject blockPrefab;
     private int rows;
     private int columns;
 
@@ -23,14 +22,17 @@ public class BlockTilemap : MonoBehaviour, ILevelGenerator
     {
         rows = 8;
         columns = 8;
-        Vector3 spriteSize = blockPrefab.GetComponent<SpriteRenderer>().bounds.size;
-        xSpacing = spriteSize.x;
-        ySpacing = spriteSize.y;
         objectGrid = new GameObject[rows, columns];
     }
 
     public int GenerateLevel(List<GameObject> tiles, int levelCount, Health.Death onDeath)
     {
+        GameObject blockPrefab = tiles[0];
+
+        Vector3 spriteSize = blockPrefab.GetComponent<SpriteRenderer>().bounds.size;
+        xSpacing = spriteSize.x;
+        ySpacing = spriteSize.y;
+
         int tileCount = 0;
 
         for (int row = 0; row < rows; row++)

@@ -1030,27 +1030,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 788101979}
-  - component: {fileID: 788101978}
+  - component: {fileID: 788101980}
   m_Layer: 0
-  m_Name: Block Grid
+  m_Name: Fixed Level Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &788101978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788101977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78db875b464964c11b9b87828b5d37ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BlockTilemap
-  blockPrefab: {fileID: 5206218976709199957, guid: 5fde757c204b7456e90336844fa53480, type: 3}
 --- !u!4 &788101979
 Transform:
   m_ObjectHideFlags: 0
@@ -1066,6 +1053,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &788101980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788101977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78db875b464964c11b9b87828b5d37ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlockTilemap
+  blockPrefab: {fileID: 5206218976709199957, guid: 5fde757c204b7456e90336844fa53480, type: 3}
 --- !u!1 &881716264
 GameObject:
   m_ObjectHideFlags: 0
